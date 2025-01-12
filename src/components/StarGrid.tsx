@@ -16,6 +16,15 @@ export default function StarGrid() {
   const grid = [14, 30] as const;
 
   useGSAP(() => {
+    if (prefersReducedMotion){
+      gsap.set(container.current, { opacity: 1 });
+      gsap.set(".star-grid-item", {
+        opacity: .2,
+        scale: 1,
+      });
+      return;
+    }
+
     gsap.set(".star-grid-item", {opacity: 0, transformOrigin:"center", color: "#fff"})
     gsap.set(container.current, {opacity: 1})
 
