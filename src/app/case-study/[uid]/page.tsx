@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PrismicText, SliceZone } from "@prismicio/react";
+import { asText } from "@prismicio/client";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
@@ -54,7 +55,7 @@ export async function generateMetadata({
   const page = await client.getByUID("case_study", uid).catch(() => notFound());
 
   return {
-    title: page.data.meta_title,
+    title: `${page.data.meta_title || asText(page.data.company) + " Case Study" }`,
     description: page.data.meta_description,
   };
 }
